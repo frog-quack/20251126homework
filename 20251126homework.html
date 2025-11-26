@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周子瑄 - 亞洲大學經管系履歷</title>
+    <!-- 載入 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 html2pdf.js CDN，用於 PDF 匯出 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        /* 使用 Inter 字體以獲得乾淨的現代感 */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        /* 載入台灣常用字體以確保中文顯示良好 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap');
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f3f4f6; /* 淺灰色背景 */
+            font-size: 13px; /* 縮小字體至 13px 以節省空間，確保單頁化 */
+        }
+        /* 確保履歷容器在列印時能保持單頁A4大小 */
+        #resume-container {
+            width: 210mm; /* A4 寬度 */
+            min-height: 297mm; /* A4 高度 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            line-height: 1.3; /* 進一步縮小行高以節省垂直空間 */
+        }
+        /* 自我介紹首行縮排 */
+        .indent-2em {
+            text-indent: 2em;
+        }
+        /* PDF 按鈕樣式 (僅保留列印相關樣式，視覺樣式已移至 HTML 標籤) */
+        #export-pdf-btn {
+            /* 確保按鈕在 PDF 匯出時顏色正常 */
+            print-color-adjust: exact;
+        }
+        /* 針對 PDF 匯出的邊距調整：減少左側 padding (10px)，增加右側安全邊距 (15px) */
+        .pdf-safe-main {
+            /* 上 10px, 右 15px, 下 10px, 左 10px (往左移動) */
+            padding: 10px 20px 10px 20px; 
+        }
+
+        @media print {
+            body { background: none; }
+            #export-pdf-btn { display: none; }
+            /* 讓履歷填滿整個列印頁面 */
+            #resume-container {
+                width: 100%;
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- 履歷主容器 - 移除圓角樣式，實現直角 A4 大小 -->
+    <div id="resume-container" class="max-w-4xl mx-auto bg-white overflow-hidden">
+        
+        <!-- 頂部資訊欄: py-4 px-6 縮小垂直空間 -->
+        <!-- 調整為 py-3 px-4, 節省垂直和水平空間 -->
+        <header class="bg-blue-600 py-3 px-4 text-white flex items-center justify-between shadow-lg">
+            <div class="flex items-center">
+                <!-- 項目1: 放入您上傳的照片 -->
+                <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-2 border-white flex-shrink-0">
+                    <img src="130974.jpg" alt="周子瑄專業照片" class="object-cover w-full h-full">
+                </div>
+                <div class="ml-4">
+                    <h1 class="text-3xl font-extrabold tracking-wider">周 子 瑄</h1>
+                    <p class="text-lg font-light mt-1">亞洲大學 經營管理系 學生</p>
+                    <p class="text-base font-light">尋求實習/工讀機會</p>
+                    
+                    <!-- 原本的 NEW BLUE BADGE - 突出強調 AI 應用能力與自主學習特質 已移除 -->
+                </div>
+            </div>
+
+            <!-- 聯絡資訊 -->
+            <div class="text-base space-y-1 text-right">
+                <div class="flex items-center justify-end">
+                    <span class="mr-2">zhouzixuan43@gmail.com</span>
+                    <!-- Email Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-10 7-10-7"/></svg>
+                </div>
+                <div class="flex items-center justify-end">
+                    <span class="mr-2">2007/02/14 (18 歲)</span>
+                    <!-- Calendar Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- 履歷內容區塊 -->
+        <main class="pdf-safe-main">
+
+            <!-- 自我介紹 -->
+            <!-- 減少底部間距 mb-5 -> mb-3 -->
+            <section class="mb-3">
+                <!-- 減少頂部間距 pt-2 -> pt-1 (已在下方 h2 移除 pt-1) -->
+                <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
+                    <!-- 圖標: 愛心 -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                    自我介紹
+                </h2>
+                <p class="text-gray-700 leading-relaxed text-base indent-2em">
+                    作為亞洲大學經營管理學系的學生，我對商業運營與策略規劃充滿熱情，並渴望將所學知識應用於實際。我樂於面對挑戰，具備快速學習新技能的能力，無論是數據分析工具還是團隊協作技巧，我都能積極投入。期待在實習或工讀中貢獻所長，為未來職涯奠定堅實基礎。
+                </p>
+            </section>
+
+            <!-- PDF 匯出按鈕 - 左對齊 -->
+            <div class="mb-3 text-left">
+                <!-- 調整: 內邊距 px-6/py-2.5，字體 text-base -->
+                <button 
+                    id="export-pdf-btn" 
+                    class="ml-0 bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 transition duration-300 shadow-xl font-black text-base"
+                >
+                    匯出 PDF 檔
+                </button>
+            </div>
+
+            <!-- 增加欄位間距 gap-6 -> gap-8 -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- 左側：技能與特質 -->
+                <div class="lg:col-span-1">
+                    
+                    <!-- 技能與專長 -->
+                    <!-- 減少底部間距 mb-5 -> mb-3 -->
+                    <section class="mb-3">
+                        <!-- 減少頂部間距 pt-2 -> pt-1 (已移除 pt-1) -->
+                        <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
+                            <!-- 圖標: 燈泡 (已確認使用) -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M15 14c.2-.8.5-2 1-3.5 1-2.5 1-4.9-1.5-7-2.7-2.4-5.9-2-8.4.5-.6.6-1 1.4-1.4 2.1-1.3 2.1-1.4 5.3 0 7.4 1.3 2 1.4 5.2-.2 7.3-1.6 2-4.1 3-6 3.5"/><path d="M15 14c.2-.8.5-2 1-3.5 1-2.5 1-4.9-1.5-7-2.7-2.4-5.9-2-8.4.5-.6.6-1 1.4-1.4 2.1-1.3 2.1-1.4 5.3 0 7.4 1.3 2 1.4 5.2-.2 7.3-1.6 2-4.1 3-6 3.5"/><path d="M12 22s4-1 4-3c0-1.6-.3-2.8-.8-3.7-.5-.9-1.2-1.7-1.8-2.3"/><path d="M12 22s-4-1-4-3c0-1.6.3-2.8.8-3.7.5-.9 1.2-1.7 1.8-2.3"/></svg>
+                            技能與專長
+                        </h2>
+                        <ul class="space-y-1 text-base text-gray-600">
+                            <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>溝通協調</li>
+                            <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>積極主動</li>
+                            <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>時間管理</li>
+                            <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>團隊合作</li>
+                            <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>AI/Discord Bot 撰寫</li>
+                        </ul>
+                    </section>
+
+                    <!-- 個人特質 -->
+                    <!-- 減少底部間距 mb-5 -> mb-3 -->
+                    <section class="mb-3">
+                        <!-- 減少頂部間距 pt-2 -> pt-1 (已移除 pt-1) -->
+                        <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
+                            <!-- 圖標: Q版半身人像剪影 -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            個人特質
+                        </h2>
+                        <ul class="space-y-1 text-base text-gray-600">
+                            <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-gray-400 mr-2"></span>勤奮</li>
+                            <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-gray-400 mr-2"></span>敢學</li>
+                            <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-gray-400 mr-2"></span>責任感</li>
+                            <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-gray-400 mr-2"></span>樂於助人</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- 右側：學歷、經歷與目標 -->
+                <div class="lg:col-span-2">
+
+                    <!-- 學歷背景 -->
+                    <!-- 減少底部間距 mb-5 -> mb-3 -->
+                    <section class="mb-3">
+                        <!-- 減少頂部間距 pt-2 -> pt-1 (已移除 pt-1) -->
+                        <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
+                            <!-- 圖標: 博士帽 (已確認使用) -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M22 10v6m-2-2h2m-2-2h2m-2 4h2m-6-8V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2zm-2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2z"/></svg>
+                            學歷背景
+                        </h2>
+                        <!-- 亞洲大學 -->
+                        <div class="flex justify-between items-start mb-2 border-l-4 border-blue-500 pl-4 py-1">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">私立亞洲大學 經營管理系</h3>
+                                <p class="text-base text-gray-600">學士班 (預計畢業)</p>
+                            </div>
+                            <span class="text-sm text-gray-500 font-medium">2025 - 2028</span>
+                        </div>
+                        <!-- 興華高中 -->
+                        <div class="flex justify-between items-start mb-2 border-l-4 border-gray-300 pl-4 py-1">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">縣立興華高中</h3>
+                                <p class="text-base text-gray-600">高中學業</p>
+                            </div>
+                            <span class="text-sm text-gray-500 font-medium">2023 - 2025</span>
+                        </div>
+                        <!-- 竹南國中 -->
+                        <div class="flex justify-between items-start mb-2 border-l-4 border-gray-300 pl-4 py-1">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">竹南國中</h3>
+                                <p class="text-base text-gray-600">國中學業</p>
+                            </div>
+                            <span class="text-sm text-gray-500 font-medium">2021 - 2023</span>
+                        </div>
+                    </section>
+
+                    <!-- 競賽與特殊經歷 -->
+                    <!-- 減少底部間距 mb-5 -> mb-3 -->
+                    <section class="mb-3">
+                        <!-- 減少頂部間距 pt-2 -> pt-1 (已移除 pt-1) -->
+                        <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
+                            <!-- 圖標: 五角星 -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            競賽與經歷
+                        </h2>
+
+                        <!-- 競賽經驗 -->
+                        <div class="mb-3">
+                            <h3 class="font-semibold text-gray-800 mb-1">競賽經驗: 2025 亞洲大學綠生活</h3>
+                            <div class="flex justify-between items-start text-base text-gray-600 pl-2 border-l-2 border-gray-300">
+                                <!-- 名次描述 -->
+                                <p>名次：<span class="font-medium text-blue-600">目前正參與初賽</span></p>
+                                <span class="text-sm text-gray-500">2025</span>
+                            </div>
+                            <p class="text-base text-gray-500 mt-1 pl-2">描述：主動參與校內競賽，培養企劃撰寫與團隊合作能力。</p>
+                        </div>
+                        
+                        <!-- 特殊經歷 -->
+                        <div class="mb-3">
+                            <h3 class="font-semibold text-gray-800 mb-1">特殊經歷: AI 應用與開發</h3>
+                            <div class="flex justify-between items-start text-base text-gray-600 pl-2 border-l-2 border-gray-300">
+                                <p>項目：用 AI 寫過 Discord 機器人</p>
+                                <span class="text-sm text-gray-500">自學/專案</span>
+                            </div>
+                            <p class="text-base text-gray-500 mt-1 pl-2">描述：展現了對新科技的快速學習能力與應用實作能力，能將編程思維應用於實際問題解決。</p>
+                        </div>
+                    </section>
+
+                    <!-- 應徵職務 -->
+                    <!-- 減少底部間距 mb-5 -> mb-3 -->
+                    <section class="mb-3">
+                        <!-- 減少頂部間距 pt-2 -> pt-1 (已移除 pt-1) -->
+                        <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
+                            <!-- 圖標: 標靶 -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                            應徵職務目標
+                        </h2>
+                        <ul class="list-disc list-inside text-base text-gray-600 space-y-1">
+                            <li><span class="font-medium text-blue-600">尋求實習機會：</span>希望能將經管系所學應用於真實商業環境，累積實戰經驗。</li>
+                            <li><span class="font-medium text-blue-600">暑期工讀：</span>願意在暑假期間投入工作，學習產業知識與專業技能。</li>
+                            <li><span class="font-medium text-blue-600">兼職機會：</span>彈性配合，以維持學業為前提，積極爭取工作機會。</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const exportBtn = document.getElementById('export-pdf-btn');
+            const resumeContainer = document.getElementById('resume-container');
+            
+            // PDF 匯出函式
+            const exportPdf = () => {
+                const opt = {
+                    // **維持邊界 0**：讓 CSS 邊距控制頁面，避免 pdf.js 自行添加邊界導致內容被截斷。
+                    margin: 0, 
+                    filename: '周子瑄_履歷表_經管系.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { 
+                        // 維持 DPI 2000 確保輸出清晰度
+                        logging: false, 
+                        dpi: 2000, 
+                        letterRendering: true,
+                        useCORS: true
+                    },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                // 呼叫 html2pdf 進行匯出
+                html2pdf().set(opt).from(resumeContainer).save();
+            };
+
+            // 綁定點擊事件
+            exportBtn.addEventListener('click', exportPdf);
+        });
+    </script>
+</body>
+</html>
