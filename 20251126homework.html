@@ -23,7 +23,7 @@
             width: 210mm; /* A4 寬度 */
             min-height: 297mm; /* A4 高度 */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            line-height: 1.3; /* 進一步縮小行高以節省垂直空間 */
+            line-height: 0.7; /* 極限壓縮行高以節省垂直空間，消除空白頁 */
         }
         /* 自我介紹首行縮排 */
         .indent-2em {
@@ -34,10 +34,10 @@
             /* 確保按鈕在 PDF 匯出時顏色正常 */
             print-color-adjust: exact;
         }
-        /* 針對 PDF 匯出的邊距調整：減少左側 padding (10px)，增加右側安全邊距 (15px) */
+        /* 針對 PDF 匯出的邊距調整：左側極限縮小到 3px，頂部/底部縮小到 5px */
         .pdf-safe-main {
-            /* 上 10px, 右 15px, 下 10px, 左 10px (往左移動) */
-            padding: 10px 20px 10px 20px; 
+            /* 上 5px (壓縮), 右 15px (保持安全), 下 5px (壓縮), 左 3px (極限左移) */
+            padding: 5px 10px 5px 20px; 
         }
 
         @media print {
@@ -57,9 +57,8 @@
     <!-- 履歷主容器 - 移除圓角樣式，實現直角 A4 大小 -->
     <div id="resume-container" class="max-w-4xl mx-auto bg-white overflow-hidden">
         
-        <!-- 頂部資訊欄: py-4 px-6 縮小垂直空間 -->
-        <!-- 調整為 py-3 px-4, 節省垂直和水平空間 -->
-        <header class="bg-blue-600 py-3 px-4 text-white flex items-center justify-between shadow-lg">
+        <!-- 頂部資訊欄: 壓縮為 py-2 px-2, 極限節省垂直和水平空間 -->
+        <header class="bg-blue-600 py-2 px-2 text-white flex items-center justify-between shadow-lg">
             <div class="flex items-center">
                 <!-- 項目1: 放入您上傳的照片 -->
                 <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-2 border-white flex-shrink-0">
@@ -93,9 +92,8 @@
         <main class="pdf-safe-main">
 
             <!-- 自我介紹 -->
-            <!-- 減少底部間距 mb-5 -> mb-3 -->
-            <section class="mb-3">
-                <!-- 減少頂部間距 pt-2 -> pt-1 (已在下方 h2 移除 pt-1) -->
+            <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
+            <section class="mb-2">
                 <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                     <!-- 圖標: 愛心 -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
@@ -107,7 +105,8 @@
             </section>
 
             <!-- PDF 匯出按鈕 - 左對齊 -->
-            <div class="mb-3 text-left">
+            <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
+            <div class="mb-2 text-left">
                 <!-- 調整: 內邊距 px-6/py-2.5，字體 text-base -->
                 <button 
                     id="export-pdf-btn" 
@@ -117,19 +116,18 @@
                 </button>
             </div>
 
-            <!-- 增加欄位間距 gap-6 -> gap-8 -->
+            <!-- 增加欄位間距 gap-8 -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 
                 <!-- 左側：技能與特質 -->
                 <div class="lg:col-span-1">
                     
                     <!-- 技能與專長 -->
-                    <!-- 減少底部間距 mb-5 -> mb-3 -->
-                    <section class="mb-3">
-                        <!-- 減少頂部間距 pt-2 -> pt-1 (已移除 pt-1) -->
+                    <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
+                    <section class="mb-2">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
-                            <!-- 圖標: 燈泡 (已確認使用) -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M15 14c.2-.8.5-2 1-3.5 1-2.5 1-4.9-1.5-7-2.7-2.4-5.9-2-8.4.5-.6.6-1 1.4-1.4 2.1-1.3 2.1-1.4 5.3 0 7.4 1.3 2 1.4 5.2-.2 7.3-1.6 2-4.1 3-6 3.5"/><path d="M15 14c.2-.8.5-2 1-3.5 1-2.5 1-4.9-1.5-7-2.7-2.4-5.9-2-8.4.5-.6.6-1 1.4-1.4 2.1-1.3 2.1-1.4 5.3 0 7.4 1.3 2 1.4 5.2-.2 7.3-1.6 2-4.1 3-6 3.5"/><path d="M12 22s4-1 4-3c0-1.6-.3-2.8-.8-3.7-.5-.9-1.2-1.7-1.8-2.3"/><path d="M12 22s-4-1-4-3c0-1.6.3-2.8.8-3.7.5-.9 1.2-1.7 1.8-2.3"/></svg>
+                            <!-- 圖標: 齒輪 (已變更) -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.44a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.44a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33 1.65 1.65 0 0 0 1.51-1V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.44a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82 1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.44a1.65 1.65 0 0 0-1.51 1z"/></svg>
                             技能與專長
                         </h2>
                         <ul class="space-y-1 text-base text-gray-600">
@@ -142,9 +140,8 @@
                     </section>
 
                     <!-- 個人特質 -->
-                    <!-- 減少底部間距 mb-5 -> mb-3 -->
-                    <section class="mb-3">
-                        <!-- 減少頂部間距 pt-2 -> pt-1 (已移除 pt-1) -->
+                    <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
+                    <section class="mb-2">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                             <!-- 圖標: Q版半身人像剪影 -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -163,12 +160,11 @@
                 <div class="lg:col-span-2">
 
                     <!-- 學歷背景 -->
-                    <!-- 減少底部間距 mb-5 -> mb-3 -->
-                    <section class="mb-3">
-                        <!-- 減少頂部間距 pt-2 -> pt-1 (已移除 pt-1) -->
+                    <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
+                    <section class="mb-2">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
-                            <!-- 圖標: 博士帽 (已確認使用) -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M22 10v6m-2-2h2m-2-2h2m-2 4h2m-6-8V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2zm-2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2z"/></svg>
+                            <!-- 圖標: 畢業證書 (FileText - 文件) -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
                             學歷背景
                         </h2>
                         <!-- 亞洲大學 -->
@@ -198,9 +194,8 @@
                     </section>
 
                     <!-- 競賽與特殊經歷 -->
-                    <!-- 減少底部間距 mb-5 -> mb-3 -->
-                    <section class="mb-3">
-                        <!-- 減少頂部間距 pt-2 -> pt-1 (已移除 pt-1) -->
+                    <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
+                    <section class="mb-2">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                             <!-- 圖標: 五角星 -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -208,7 +203,8 @@
                         </h2>
 
                         <!-- 競賽經驗 -->
-                        <div class="mb-3">
+                        <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
+                        <div class="mb-2">
                             <h3 class="font-semibold text-gray-800 mb-1">競賽經驗: 2025 亞洲大學綠生活</h3>
                             <div class="flex justify-between items-start text-base text-gray-600 pl-2 border-l-2 border-gray-300">
                                 <!-- 名次描述 -->
@@ -219,7 +215,8 @@
                         </div>
                         
                         <!-- 特殊經歷 -->
-                        <div class="mb-3">
+                        <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
+                        <div class="mb-2">
                             <h3 class="font-semibold text-gray-800 mb-1">特殊經歷: AI 應用與開發</h3>
                             <div class="flex justify-between items-start text-base text-gray-600 pl-2 border-l-2 border-gray-300">
                                 <p>項目：用 AI 寫過 Discord 機器人</p>
@@ -230,9 +227,8 @@
                     </section>
 
                     <!-- 應徵職務 -->
-                    <!-- 減少底部間距 mb-5 -> mb-3 -->
-                    <section class="mb-3">
-                        <!-- 減少頂部間距 pt-2 -> pt-1 (已移除 pt-1) -->
+                    <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
+                    <section class="mb-2">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                             <!-- 圖標: 標靶 -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
