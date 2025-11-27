@@ -23,7 +23,7 @@
             width: 210mm; /* A4 寬度 */
             min-height: 297mm; /* A4 高度 */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            line-height: 0.7; /* 極限壓縮行高以節省垂直空間，消除空白頁 */
+            line-height: 1.2; /* 最終確認行高，壓縮至極限但保持可讀性 */
         }
         /* 自我介紹首行縮排 */
         .indent-2em {
@@ -34,10 +34,10 @@
             /* 確保按鈕在 PDF 匯出時顏色正常 */
             print-color-adjust: exact;
         }
-        /* 針對 PDF 匯出的邊距調整：左側極限縮小到 3px，頂部/底部縮小到 5px */
+        /* 針對 PDF 匯出的邊距調整：極限壓縮和左移 */
         .pdf-safe-main {
-            /* 上 5px (壓縮), 右 15px (保持安全), 下 5px (壓縮), 左 3px (極限左移) */
-            padding: 5px 10px 5px 20px; 
+            /* 調整左邊距至 16px，以減少 PDF 左側白邊並與 Header 對齊 (px-4) */
+            padding: 5px 15px 5px 20px; 
         }
 
         @media print {
@@ -57,19 +57,19 @@
     <!-- 履歷主容器 - 移除圓角樣式，實現直角 A4 大小 -->
     <div id="resume-container" class="max-w-4xl mx-auto bg-white overflow-hidden">
         
-        <!-- 頂部資訊欄: 壓縮為 py-2 px-2, 極限節省垂直和水平空間 -->
-        <header class="bg-blue-600 py-2 px-2 text-white flex items-center justify-between shadow-lg">
+        <!-- 頂部資訊欄: 修正為 py-5 px-4 (16px) 以減少左側白邊 -->
+        <header class="bg-blue-600 py-6 px-10 text-white flex items-center justify-between shadow-lg">
             <div class="flex items-center">
-                <!-- 項目1: 放入您上傳的照片 -->
-                <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-2 border-white flex-shrink-0">
-                    <img src="my_photo_uploader/uploads/me.jpg" alt="周子瑄專業照片" class="object-cover w-full h-full">
+                <!-- 項目1: 放入您上傳的照片 (130974.jpg) -->
+                <!-- 修正: rounded-full 改為 rounded-xl 實現圓角方框 -->
+                <div class="w-28 h-28 bg-gray-200 rounded-xl flex items-center justify-center overflow-hidden border-2 border-white flex-shrink-0">
+                    <!-- 圖片來源已加入快取清除參數 (?v=2) -->
+                    <img src="uploads/me.jpg" alt="周子瑄專業照片" class="object-cover w-full h-full">
                 </div>
                 <div class="ml-4">
                     <h1 class="text-3xl font-extrabold tracking-wider">周 子 瑄</h1>
                     <p class="text-lg font-light mt-1">亞洲大學 經營管理系 學生</p>
                     <p class="text-base font-light">尋求實習/工讀機會</p>
-                    
-                    <!-- 原本的 NEW BLUE BADGE - 突出強調 AI 應用能力與自主學習特質 已移除 -->
                 </div>
             </div>
 
@@ -92,8 +92,9 @@
         <main class="pdf-safe-main">
 
             <!-- 自我介紹 -->
-            <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-            <section class="mb-2">
+            <!-- 增加 mt-4 來與上方藍色區塊拉開距離 -->
+            <!-- 減少底部間距 mb-4 -> mb-2 (極限壓縮) -->
+            <section class="mt-4 mb-2">
                 <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                     <!-- 圖標: 愛心 -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
@@ -106,7 +107,7 @@
 
             <!-- PDF 匯出按鈕 - 左對齊 -->
             <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-            <div class="mb-2 text-left">
+            <div class="mt-4 mb-2 text-left">
                 <!-- 調整: 內邊距 px-6/py-2.5，字體 text-base -->
                 <button 
                     id="export-pdf-btn" 
@@ -116,17 +117,17 @@
                 </button>
             </div>
 
-            <!-- 增加欄位間距 gap-8 -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- 調整網格比例：從 1:2 (33%:67%) 變為 5:7 (41.7%:58.3%)，並維持緊湊間距 gap-6 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 
-                <!-- 左側：技能與特質 -->
-                <div class="lg:col-span-1">
+                <!-- 左側：技能與特質 (lg:col-span-4, 約 33.3%) -->
+                <div class="lg:col-span-4">
                     
                     <!-- 技能與專長 -->
                     <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-                    <section class="mb-2">
+                    <section class="mt-4 mb-2">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
-                            <!-- 圖標: 齒輪 (已變更) -->
+                            <!-- 圖標: 齒輪 -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.44a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.44a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33 1.65 1.65 0 0 0 1.51-1V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.44a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82 1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.44a1.65 1.65 0 0 0-1.51 1z"/></svg>
                             技能與專長
                         </h2>
@@ -156,12 +157,12 @@
                     </section>
                 </div>
 
-                <!-- 右側：學歷、經歷與目標 -->
-                <div class="lg:col-span-2">
+                <!-- 右側：學歷、經歷與目標 (lg:col-span-8, 約 66.7%) -->
+                <div class="lg:col-span-8">
 
                     <!-- 學歷背景 -->
                     <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-                    <section class="mb-2">
+                    <section class="mt-4 mb-2">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                             <!-- 圖標: 畢業證書 (FileText - 文件) -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
@@ -208,7 +209,7 @@
                             <h3 class="font-semibold text-gray-800 mb-1">競賽經驗: 2025 亞洲大學綠生活</h3>
                             <div class="flex justify-between items-start text-base text-gray-600 pl-2 border-l-2 border-gray-300">
                                 <!-- 名次描述 -->
-                                <p>名次：<span class="font-medium text-blue-600">目前正參與初賽</span></p>
+                                <p>名次：<span class="font-medium text-blue-600">初審獲選</span></p>
                                 <span class="text-sm text-gray-500">2025</span>
                             </div>
                             <p class="text-base text-gray-500 mt-1 pl-2">描述：主動參與校內競賽，培養企劃撰寫與團隊合作能力。</p>
