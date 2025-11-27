@@ -36,7 +36,7 @@
         }
         /* 針對 PDF 匯出的邊距調整：極限壓縮和左移 */
         .pdf-safe-main {
-            /* 調整左邊距至 16px，以減少 PDF 左側白邊並與 Header 對齊 (px-4) */
+            /* 調整左邊距至 20px，以減少 PDF 左側白邊並與 Header 對齊 */
             padding: 5px 15px 5px 20px; 
         }
 
@@ -57,14 +57,19 @@
     <!-- 履歷主容器 - 移除圓角樣式，實現直角 A4 大小 -->
     <div id="resume-container" class="max-w-4xl mx-auto bg-white overflow-hidden">
         
-        <!-- 頂部資訊欄: 修正為 py-5 px-4 (16px) 以減少左側白邊 -->
+        <!-- 頂部資訊欄: py-6 px-10 -->
         <header class="bg-blue-600 py-6 px-10 text-white flex items-center justify-between shadow-lg">
             <div class="flex items-center">
                 <!-- 項目1: 放入您上傳的照片 (130974.jpg) -->
                 <!-- 修正: rounded-full 改為 rounded-xl 實現圓角方框 -->
                 <div class="w-28 h-28 bg-gray-200 rounded-xl flex items-center justify-center overflow-hidden border-2 border-white flex-shrink-0">
-                    <!-- 圖片來源已加入快取清除參數 (?v=2) -->
-                    <img src="uploads/me.jpg" alt="周子瑄專業照片" class="object-cover w-full h-full">
+                    <!-- 圖片類別移除 object-cover，改用 style 屬性確保 PDF 匯出時保持比例 -->
+                    <img 
+                        src="uploads/me.jpg?v=2" 
+                        alt="周子瑄專業照片" 
+                        class="w-full h-full" 
+                        style="object-fit: cover;"
+                    >
                 </div>
                 <div class="ml-4">
                     <h1 class="text-3xl font-extrabold tracking-wider">周 子 瑄</h1>
