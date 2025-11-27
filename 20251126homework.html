@@ -61,12 +61,11 @@
         <!-- 頂部資訊欄: py-5 px-10 (已將 py-6 調整為 py-5) -->
         <header class="bg-blue-600 py-5 px-10 text-white flex items-center justify-between shadow-lg">
             <div class="flex items-center">
-                <!-- 調整: 維持照片容器尺寸 w-20 h-20 (80px x 80px) -->
-                <!-- 關鍵更新: 增加 style="width: 80px; height: 80px;" 確保 PDF 匯出時尺寸正確，避免變形 -->
-                <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-2 border-white flex-shrink-0" style="width: 80px; height: 80px;">
-                    <!-- 圖片路徑 v=4 -->
+                <!-- 調整: 放大照片容器尺寸 w-32 h-32 (從 w-28 h-28 調整) -->
+                <div class="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-2 border-white flex-shrink-0">
+                    <!-- 圖片路徑更新為 ?v=3，並保持 style="object-fit: cover;" 來確保比例 -->
                     <img 
-                        src="uploads/me.jpg?v=4" 
+                        src="uploads/me.jpg?v=3" 
                         alt="周子瑄專業照片" 
                         class="w-full h-full" 
                         style="object-fit: cover;"
