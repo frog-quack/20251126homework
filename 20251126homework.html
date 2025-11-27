@@ -120,7 +120,16 @@
                 >
                     匯出 PDF 檔
                 </button>
-            </div> -> mb-2 (極限壓縮) -->
+            </div>
+
+            <!-- 調整網格比例：從 1:2 (33%:67%) 變為 5:7 (41.7%:58.3%)，並維持緊湊間距 gap-6 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- 左側：技能與特質 (lg:col-span-4, 約 33.3%) -->
+                <div class="lg:col-span-4">
+                    
+                    <!-- 技能與專長 -->
+                    <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
                     <section class="mt-4 mb-2">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                             <!-- 圖標: 齒輪 -->
@@ -319,12 +328,3 @@
     </script>
 </body>
 </html>
-
-            <!-- 調整網格比例：從 1:2 (33%:67%) 變為 5:7 (41.7%:58.3%)，並維持緊湊間距 gap-6 -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                
-                <!-- 左側：技能與特質 (lg:col-span-4, 約 33.3%) -->
-                <div class="lg:col-span-4">
-                    
-                    <!-- 技能與專長 -->
-                    <!-- 減少底部間距 mb-3
