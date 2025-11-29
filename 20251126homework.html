@@ -17,28 +17,23 @@
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
             background-color: #f3f4f6; /* 淺灰色背景 */
             font-size: 13px; /* 縮小字體至 13px 以節省空間，確保單頁化 */
+            color: #1f2937; /* 預設深灰色文字 */
         }
         /* 確保履歷容器在列印時能保持單頁A4大小 */
         #resume-container {
             width: 210mm; /* A4 寬度 */
             min-height: 297mm; /* A4 高度 */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            /* 維持放寬的行高，改善整體閱讀體驗 */
-            line-height: 1.3; 
+            line-height: 1.3; /* 維持放寬的行高，改善整體閱讀體驗 */
         }
         /* 自我介紹首行縮排 */
         .indent-2em {
             text-indent: 2em;
         }
-        /* PDF 按鈕樣式 (僅保留列印相關樣式，視覺樣式已移至 HTML 標籤) */
-        #export-pdf-btn {
-            /* 確保按鈕在 PDF 匯出時顏色正常 */
-            print-color-adjust: exact;
-        }
-        /* 針對 PDF 匯出的邊距調整：極限壓縮和左移 */
+        /* 針對 PDF 匯出的邊距調整：使用標準 Tailwind 邊距，並在 CSS 中微調 */
         .pdf-safe-main {
-            /* 調整左邊距至 20px，以減少 PDF 左側白邊並與 Header 對齊 */
-            padding: 5px 15px 5px 25px; 
+            /* 調整上/下/右邊距為 15px, 左邊距為 25px */
+            padding: 5px 15px 10px 25px; 
         }
 
         @media print {
@@ -55,20 +50,21 @@
 </head>
 <body class="p-4 md:p-8">
 
-    <!-- 履歷主容器 - 移除圓角樣式，實現直角 A4 大小 -->
+    <!-- 匯出 PDF 檔時，請點擊下方的「匯出 PDF 檔」按鈕 -->
     <div id="resume-container" class="max-w-4xl mx-auto bg-white overflow-hidden">
         
-        <!-- 頂部資訊欄: py-5 px-10 (已將 py-6 調整為 py-5) -->
+        <!-- 頂部資訊欄 -->
         <header class="bg-blue-600 py-5 px-10 text-white flex items-center justify-between shadow-lg">
             <div class="flex items-center">
-                <!-- 調整: 放大照片容器尺寸 w-32 h-32 (從 w-28 h-28 調整) -->
+                <!-- 照片容器: 放大尺寸 w-32 h-32 -->
                 <div class="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden border-2 border-white flex-shrink-0">
-                    <!-- 圖片路徑更新為 ?v=3，並保持 style="object-fit: cover;" 來確保比例 -->
+                    <!-- 圖片路徑已更新：從目前目錄進入 uploads 資料夾 -->
                     <img 
-                        src="uploads/me2.jpg" 
+                        src="./uploads/me2.jpg" 
                         alt="周子瑄專業照片" 
                         class="w-full h-full" 
                         style="object-fit: cover;"
+                        onerror="this.onerror=null; this.src='https://placehold.co/128x128/eeeeee/1f2937?text=Image+Load+Error';"
                     >
                 </div>
                 <div class="ml-4">
@@ -82,24 +78,33 @@
             <div class="text-base space-y-1 text-right">
                 <div class="flex items-center justify-end">
                     <span class="mr-2">zhouzixuan43@gmail.com</span>
-                    <!-- Email Icon -->
+                    <!-- Email Icon (信封) -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-10 7-10-7"/></svg>
                 </div>
                 <div class="flex items-center justify-end">
                     <span class="mr-2">2007/02/14 (18 歲)</span>
-                    <!-- Calendar Icon -->
+                    <!-- Calendar Icon (日曆) -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                 </div>
             </div>
         </header>
 
         <!-- 履歷內容區塊 -->
+        <!-- 保持 padding 為 15px 25px (上右下左) 以確保內容不被截斷 -->
         <main class="pdf-safe-main">
 
+            <!-- PDF 匯出按鈕 - 獨立區塊，不受 grid 影響 -->
+            <div class="mt-2 mb-4 text-left">
+                <button 
+                    id="export-pdf-btn" 
+                    class="ml-0 bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 transition duration-300 shadow-xl font-black text-base"
+                >
+                    匯出 PDF 檔
+                </button>
+            </div>
+
             <!-- 自我介紹 -->
-            <!-- 增加 mt-4 來與上方藍色區塊拉開距離 -->
-            <!-- 減少底部間距 mb-4 -> mb-2 (極限壓縮) -->
-            <section class="mt-4 mb-2">
+            <section class="mt-4 mb-4">
                 <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                     <!-- 圖標: 愛心 -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
@@ -110,27 +115,14 @@
                 </p>
             </section>
 
-            <!-- PDF 匯出按鈕 - 左對齊 -->
-            <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-            <div class="mt-4 mb-2 text-left">
-                <!-- 調整: 內邊距 px-6/py-2.5，字體 text-base -->
-                <button 
-                    id="export-pdf-btn" 
-                    class="ml-0 bg-blue-600 text-white px-6 py-2.5 rounded-lg hover:bg-blue-700 transition duration-300 shadow-xl font-black text-base"
-                >
-                    匯出 PDF 檔
-                </button>
-            </div>
-
-            <!-- 調整網格比例：從 1:2 (33%:67%) 變為 5:7 (41.7%:58.3%)，並維持緊湊間距 gap-6 -->
+            <!-- 網格佈局區塊 (左側 4/12, 右側 8/12) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 
-                <!-- 左側：技能與特質 (lg:col-span-4, 約 33.3%) -->
+                <!-- 左側：技能與特質 (lg:col-span-4) -->
                 <div class="lg:col-span-4">
                     
                     <!-- 技能與專長 -->
-                    <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-                    <section class="mt-4 mb-2">
+                    <section class="mt-3 mb-4">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                             <!-- 圖標: 齒輪 -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.44a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.44a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33 1.65 1.65 0 0 0 1.51-1V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.44a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82 1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.44a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -146,8 +138,7 @@
                     </section>
 
                     <!-- 個人特質 -->
-                    <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-                    <section class="mt-4 mb-1">
+                    <section class="mt-3 mb-4">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                             <!-- 圖標: Q版半身人像剪影 -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -162,12 +153,11 @@
                     </section>
                 </div>
 
-                <!-- 右側：學歷、經歷與目標 (lg:col-span-8, 約 66.7%) -->
+                <!-- 右側：學歷、經歷與目標 (lg:col-span-8) -->
                 <div class="lg:col-span-8">
 
                     <!-- 學歷背景 -->
-                    <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-                    <section class="mt-4 mb-2">
+                    <section class="mt-3 mb-4">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                             <!-- 圖標: 畢業證書 (FileText - 文件) -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
@@ -200,39 +190,35 @@
                     </section>
 
                     <!-- 競賽與特殊經歷 -->
-                    <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-                    <section class="mt-4 mb-2">
+                    <section class="mt-4 mb-4">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                             <!-- 圖標: 五角星 -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                             競賽與經歷
                         </h2>
 
-                        <!-- 競賽經驗 -->
-                        <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-                        <div class="mb-2">
+                        <!-- 競賽經驗: 亞洲大學綠生活 -->
+                        <div class="mb-3">
                             <h3 class="font-semibold text-gray-800 mb-1">競賽經驗: 2025 亞洲大學綠生活</h3>
                             <div class="flex justify-between items-start text-base text-gray-600 pl-2 border-l-2 border-gray-300">
-                                <!-- 名次描述 -->
                                 <p>名次：<span class="font-medium text-blue-600">初審獲選，準備決賽</span></p>
                                 <span class="text-sm text-gray-500">2025</span>
                             </div>
                             <p class="text-base text-gray-500 mt-1 pl-2">描述：主動參與校內競賽，培養企劃撰寫與團隊合作能力。</p>
                         </div>
 
-                        <div class="mb-2">
+                        <!-- 競賽經驗: AI回憶明信片 -->
+                        <div class="mb-3">
                             <h3 class="font-semibold text-gray-800 mb-1">競賽經驗: AI回憶明信片</h3>
                             <div class="flex justify-between items-start text-base text-gray-600 pl-2 border-l-2 border-gray-300">
-                                <!-- 名次描述 -->
                                 <p>名次：<span class="font-medium text-blue-600">優等</span></p>
                                 <span class="text-sm text-gray-500">2025</span>
                             </div>
                             <p class="text-base text-gray-500 mt-1 pl-2">描述：主動參與校內競賽，培養專案創新與跨領域整合的實戰力。</p>
                         </div>
                         
-                        <!-- 特殊經歷 -->
-                        <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-                        <div class=" mb-2">
+                        <!-- 特殊經歷: AI 應用與開發 -->
+                        <div class=" mb-3">
                             <h3 class="font-semibold text-gray-800 mb-1">特殊經歷: AI 應用與開發</h3>
                             <div class="flex justify-between items-start text-base text-gray-600 pl-2 border-l-2 border-gray-300">
                                 <p>項目：用 AI 寫過 Discord 機器人</p>
@@ -243,31 +229,26 @@
                     </section>
 
                     <!-- 應徵職務 -->
-                    <!-- 減少底部間距 mb-3 -> mb-2 (極限壓縮) -->
-                    <section class="mt-4 mb-2">
+                    <section class="mt-3 mb-4">
                         <h2 class="text-xl font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700 flex items-center">
                             <!-- 圖標: 標靶 -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                             應徵職務目標
                         </h2>
-                        <!-- 修正: 調整為 space-y-3 增加行距，同時保持 Flexbox 對齊 -->
                         <ul class="text-base text-gray-600 space-y-3 pl-4">
                             
-                            <!-- 項目 1: 使用 Flex 實現文字對齊 -->
+                            <!-- 項目 1: 實習機會 -->
                             <li class="flex items-start">
-                                <!-- 標籤與子彈符號 (flex-shrink-0 確保不換行) -->
                                 <span class="flex-shrink-0 mr-1">
-                                    <!-- 保持灰色子彈符號的視覺效果 -->
                                     <span class="inline-block text-gray-600 mr-1">•</span> 
                                     <span class="font-medium text-blue-600">尋求實習機會：</span>
                                 </span>
-                                <!-- 描述內容 (flex-1 讓文字換行時對齊上方標籤之後) -->
                                 <span class="flex-1">
-                                    希望能將經管系所學應用於真實商業環境，累積實戰經驗。
+                                    希望將經管系所學應用於真實商業環境，累積實戰經驗。
                                 </span>
                             </li>
 
-                            <!-- 項目 2: 使用 Flex 實現文字對齊 -->
+                            <!-- 項目 2: 暑期工讀 -->
                             <li class="flex items-start">
                                 <span class="flex-shrink-0 mr-1">
                                     <span class="inline-block text-gray-600 mr-1">•</span> 
@@ -278,7 +259,7 @@
                                 </span>
                             </li>
 
-                            <!-- 項目 3: 使用 Flex 實現文字對齊 -->
+                            <!-- 項目 3: 兼職機會 -->
                             <li class="flex items-start">
                                 <span class="flex-shrink-0 mr-1">
                                     <span class="inline-block text-gray-600 mr-1">•</span> 
@@ -304,7 +285,7 @@
             // PDF 匯出函式
             const exportPdf = () => {
                 const opt = {
-                    // **維持邊界 0**：讓 CSS 邊距控制頁面，避免 pdf.js 自行添加邊界導致內容被截斷。
+                    // 維持邊界 0：讓 CSS 邊距控制頁面，避免 pdf.js 自行添加邊界導致內容被截斷。
                     margin: 0, 
                     filename: '周子瑄_履歷表_經管系.pdf',
                     image: { type: 'jpeg', quality: 0.98 },
